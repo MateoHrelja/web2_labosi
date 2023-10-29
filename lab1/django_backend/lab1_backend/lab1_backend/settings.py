@@ -58,10 +58,12 @@ MIDDLEWARE = [
 
 # CORS_ALLOWED_ORIGINS = ['*']  # Replace with your frontend URL
 
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-]
+# CORS_ALLOW_METHODS = [
+#     'GET',
+#     'POST',
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'lab1_backend.urls'
 
