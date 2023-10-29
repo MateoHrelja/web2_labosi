@@ -1,3 +1,5 @@
 dj_database_url==2.1.0
 Django>=3.2.1
 python-decouple==3.8
+django-cors-headers==4.0.0
+djangorestframework==3.14.0
