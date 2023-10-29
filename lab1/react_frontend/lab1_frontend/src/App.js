@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import LoginButton from './LoginButton.js'
 
 function App() {
   const [response, setResponse] = useState('');
@@ -25,6 +26,7 @@ function App() {
         <h1>Baseline React App</h1>
         <button onClick={sendRequest}>Send Request to Backend Test</button>
         {response && <p>Response from Backend: {response}</p>}
+        <LoginButton></LoginButton>
       </header>
     </div>
   );
