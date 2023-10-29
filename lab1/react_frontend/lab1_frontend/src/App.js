@@ -11,7 +11,8 @@ function App() {
         "age": 27
     }
     try {
-      const response = await axios.post('http://localhost:3001', { test_body }); // Replace with your actual backend endpoint
+      const url = process.env.REACT_APP_API_URL + ''
+      const response = await axios.post(url, { test_body });
       setResponse(response.data.status);
     } catch (error) {
       console.error('Error:', error);
