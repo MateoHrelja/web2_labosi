@@ -10,29 +10,13 @@ function App() {
 
   const { user, isAuthenticated } = useAuth0();
 
-  console.log(user)
-
-  const sendRequest = async () => {
-    const test_body = {
-        "name": "Mateo",
-        "age": 27
-    }
-    try {
-      const url = process.env.REACT_APP_API_URL + ''
-      const response = await axios.post(url, { test_body });
-      setResponse(response.data.status);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
   return (
     <div className="App">
       <header className="App-header">
         <h1>Web2 Lab1 assignment, created in React</h1>
-        <h3>A modest homepage for a modest lab assignment</h3>
-        {/* <button onClick={sendRequest}>Send Request to Backend Test</button> */}
+        <h3>Just a simple landing page with login/logout buttons</h3>
         {response && <p>Response from Backend: {response}</p>}
+        {isAuthenticated && <p>Welcome, {user.nickname}</p>}
         {isAuthenticated && <LogoutButton></LogoutButton>}
         {!isAuthenticated && <LoginButton></LoginButton>}
       </header>

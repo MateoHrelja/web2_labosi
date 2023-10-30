@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views import View
 from itertools import combinations
 from ..models import TournamentModel
+from rest_framework import authentication, permissions
 
 
 def return_schedule(competitors):
@@ -17,28 +18,37 @@ def return_schedule(competitors):
 
 
 class TournamentView(View):
-    def get(self, request, id):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, id=None):
         if id is not None:
             try:
-                tournament = TournamentModel.objects.get(tournament_id=id)
+                id = int(id)
+            except ValueError:
+                return HttpResponse("Invalid tournament ID")
+
+            try:
+                tournament = TournamentModel.objects.get(id=id)
                 data = {
                     'id': tournament.tournament_id,
                     'name': tournament.tournament_name,
                     'competitors': tournament.competitors.split(';'),
-                    'schedule': return_schedule(tournament.competitors.split(';')),
+                    'schedule': return_schedule(tournament.competitors),
                     'sport': tournament.sport,
                     'results': tournament.results,
-                    'is_editable': tournament.user == request.user,
+                    'is_editable': tournament.user == request.user
                 }
+                return HttpResponse(json.dumps(data))
             except TournamentModel.DoesNotExist:
-                return HttpResponse("Tournament not found", status=404)
+                return HttpResponse("Tournament not found")
         else:
             tournaments = TournamentModel.objects.filter(user=request.user)
             data = [{
                 'id': tournament.tournament_id,
                 'name': tournament.tournament_name
             } for tournament in tournaments]
-        return HttpResponse(json.dumps(data))
+            return HttpResponse(json.dumps(data))
 
     def post(self, request):
         loaded_request = json.loads(request.body)
