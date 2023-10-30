@@ -6,7 +6,7 @@ import TournamentDetailPage from "./TournamentDetailPage";
 
 function AppRouter() {
   return (
-    <Router>
+    <Router basename="https://web2-react-frontend.onrender.com">
       <Routes>
         <Route path="/" element={<App />} /> {/* Landing page */}
         <Route path="/tournaments" element={<TournamentsListPage />} />
