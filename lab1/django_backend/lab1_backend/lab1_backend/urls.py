@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views.home_view import HomeView
+from .views.tournament_view import TournamentView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomeView.as_view())
+    path('', HomeView.as_view()),
+    path('tournaments', TournamentView.as_view()),
+    path('tournaments/<int:id>', TournamentView.as_view())
 ]
