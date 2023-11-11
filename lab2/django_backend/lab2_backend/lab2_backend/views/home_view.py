@@ -12,7 +12,7 @@ class HomeView(APIView):
 
     def post(self, request):
         data = request.data
-        protection_enabled = True if request.GET.get('protection_enabled', None) == '1' else False
+        protection_enabled = True if request.GET.get('xssProtection', None) == '1' else False
         title = data['title']
         content = data['content']
         if protection_enabled:
