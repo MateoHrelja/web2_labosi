@@ -20,8 +20,9 @@ def serialize_user_data(user_data):
 
 class UserView(APIView):
     def get(self, request, id):
-        protection_enabled = True if request.GET.get('protection_enabled', None) == '1' else False
-        request_user_id = request.user.id
+        protection_enabled = True if request.GET.get('accessProtection', None) == '1' else False
+        # fake bearer token
+        request_user_id = int(request.headers.get('Authorization').split(';')[1])
         if protection_enabled:
             if request_user_id != id:
                 return Response("You do not have permission to view this page", status=status.HTTP_401_UNAUTHORIZED)

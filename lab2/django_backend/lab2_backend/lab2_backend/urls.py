@@ -23,5 +23,5 @@ from .views.user_view import UserView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view()),
-    path('user/<int:id>', UserView.as_view())
+    path('users/<int:id>', UserView.as_view())
 ]

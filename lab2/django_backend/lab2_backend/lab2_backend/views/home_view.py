@@ -13,18 +13,15 @@ class HomeView(APIView):
     def post(self, request):
         data = request.data
         protection_enabled = True if request.GET.get('xssProtection', None) == '1' else False
-        title = data['title']
-        content = data['content']
+        comment = data['comment']
         if protection_enabled:
-            title = escape(title)
-            content = escape(content)
+            comment = escape(comment)
 
-        if title == '' or content == '':
+        if comment == '':
             return Response("", status=status.HTTP_400_BAD_REQUEST)
 
         response_data = {
-            'title': title,
-            'content': content
+            'comment': comment
         }
 
         return Response(data=response_data, status=status.HTTP_200_OK)
