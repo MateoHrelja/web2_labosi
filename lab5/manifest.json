@@ -462,13 +462,13 @@
       {
         "src": "assets/img/screenshots/screenshot-wide.JPG",
         "sizes": "1554x828",
-        "type": "image/jpg",
+        "type": "image/JPG",
         "form_factor": "wide"
       },
       {
         "src": "assets/img/screenshots/screenshot-mobile.JPG",
         "sizes": "1554x828",
-        "type": "image/jpg",
+        "type": "image/JPG",
         "form_factor": "narrow"
       }
   ]
